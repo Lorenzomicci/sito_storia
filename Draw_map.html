@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Untitled 1</title>
+<script type="text/javascript" src="jquery-2.1.4.js"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=drawing"></script>
+<link rel="stylesheet" type="text/css" href="css_draw_map.css"/>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+     
+      var opzionimappa = {
+             zoom:2,
+             center: new google.maps.LatLng(43.6477572,13.0378856),
+             mapTypeId: google.maps.MapTypeId.MAP
+      };
+      
+      map = new google.maps.Map(document.getElementById("map"),opzionimappa);
+      
+
+    principale();
+
+})
+
+</script>
+
+
+<script type="text/javascript">
+function principale(){ 
+
+    var bermudaTriangle = new google.maps.Polygon({
+    paths: [
+      new google.maps.LatLng(25.774, -80.190),
+      new google.maps.LatLng(18.466, -66.118),
+      new google.maps.LatLng(32.321, -64.757)
+    ]
+  });
+
+    google.maps.event.addListener(map, 'click', function(event) {
+    console.log(google.maps.geometry.poly.containsLocation(event.latLng, bermudaTriangle));
+  });
+
+$("#Modalita").click(function(){
+
+    var drawingManager = new google.maps.drawing.DrawingManager({
+    drawingMode: google.maps.drawing.OverlayType.MARKER,
+    drawingControl: true,
+    drawingControlOptions: {
+      position: google.maps.ControlPosition.TOP_CENTER,
+      drawingModes: [
+        google.maps.drawing.OverlayType.MARKER,
+        google.maps.drawing.OverlayType.CIRCLE,
+        google.maps.drawing.OverlayType.POLYGON,
+        google.maps.drawing.OverlayType.POLYLINE,
+        google.maps.drawing.OverlayType.RECTANGLE
+      ]
+    },
+    markerOptions: {icon: 'images/beachflag.png'},
+    circleOptions: {
+      fillColor: '#ffff00',
+      fillOpacity: 1,
+      strokeWeight: 5,
+      clickable: false,
+      editable: true,
+      zIndex: 1
+    }
+  });
+  drawingManager.setMap(map);
+})
+
+}
+
+
+
+</script>
+
+
+
+</head>
+
+<body>
+
+<div id="map"></div>
+<input type="button" id="Modalita" value="change"/>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
